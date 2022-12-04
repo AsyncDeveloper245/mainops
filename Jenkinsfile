@@ -12,11 +12,6 @@ pipeline {
           }
         }
     
-//     stage("build backend){
-//            sh ""
-          
-//           }
-          
           
           stage("deploy code"){
             
