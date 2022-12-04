@@ -8,9 +8,8 @@ pipeline {
         stage("build frontend/client"){
           
           steps{
-          sh "cd client"
-          sh "npm install"
-          sh "npm run build"
+          sh "cd client && npm install && npm run build "
+
             
           }
         }
