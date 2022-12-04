@@ -2,9 +2,10 @@ pipeline {
   
   
   agent any
+  
   stages{
   
-        stage("build frontend"){
+        stage("build frontend/client"){
           
           steps{
           sh "cd client"
