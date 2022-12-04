@@ -1,0 +1,31 @@
+
+
+on:
+  push:
+    branches:
+      - master
+
+
+jobs:
+    deploy_prod:
+      runs-on: ubuntu-latest
+      environment: production
+
+      steps:
+        - name: Install SSH Key
+          uses: shimataro/ssh-key-action@v2
+          with:
+            key: ${{ secrets.AZURE_DEPLOY }}
+            known_hosts: 'adding known hosts'
+        
+
+        - name: Add Known Host
+          run: ssh-keyscan -H ${{ SSH_HOST }} >> ~/.ssh/known_hosts
+        
+        - name: Deploy Frontend with SSH
+          run: rsync -navz ./frontend ${{ SSH_USER }}@${{SSH_HOST}}:/home/${{ SSH_USER }}/frontend
+
+        - name: Deploy Backend with SSH
+          run: rsync -azvn ./backend ${{ SSH_USER }}@${{ SSH_HOST }}:/home/${{ SSH_USER }}/backend
+
+      
