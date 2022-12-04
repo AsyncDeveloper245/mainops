@@ -2,7 +2,7 @@ pipeline {
 
   stages{
   
-        stage("build frontend"){
+        steps("build frontend"){
           sh "cd client"
           sh "npm install"
           sh "npm run build"
@@ -14,7 +14,7 @@ pipeline {
 //           }
           
           
-          stage("deploy code"){
+          steps("deploy code"){
           
            sh "cp -rf client /home/azureuser/frontend"
            sh "cp -rf backend /home/azureuser/backend"
