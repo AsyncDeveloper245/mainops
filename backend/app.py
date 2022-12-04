@@ -7,7 +7,7 @@ import json
 
 app = Flask(__name__)
 CORS(app)
-client = MongoClient('localhost', 27017, username='root', password='rootpass')
+client = MongoClient('localhost', 27017)
 FRONTEND_SERVER_URL = "http://localhost:3000"
 
 db = client.credentials_db
@@ -17,14 +17,14 @@ credentials = db.credentials
 @app.route("/",methods=["POST","GET"])
 def add_content(identifier=None):
     if request.method == "POST":
+
         creds = json.loads(request.data)
-        creds_obj = json.loads(creds["creds"])
-        key = creds_obj.get("key")
-        value = creds_obj.get("value")
-        encoded_value = base64.b64encode(value.encode('utf-8'))
+        key = creds.get("key")
+        encoded_value = base64.b64encode(key.encode('utf-8'))
         print(encoded_value)
-        credentials.insert_one({"identifier":key,"value":encoded_value})
-        return json.dumps({"status":"success"})
+        credentials.insert_one({"key":key,"encoded_value":encoded_value})
+        print(credentials.find_one({"key":key}))
+        return json.dumps({"status":"success","encoded-value":str(encoded_value)})
     # if request.method == "GET":
     #     credentials.find_one({"identifier":identifier})
 
