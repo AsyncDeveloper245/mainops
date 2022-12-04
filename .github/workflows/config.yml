@@ -23,9 +23,9 @@ jobs:
           run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
         
         - name: Deploy Frontend with SSH
-          run: rsync -navzf ./frontend ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/frontend
+          run: rsync -navz ./frontend ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/frontend
 
         - name: Deploy Backend with SSH
-          run: rsync -azvnf ./backend ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/backend
+          run: rsync -azvn ./backend ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/backend
 
       
