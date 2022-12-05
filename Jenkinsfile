@@ -21,7 +21,7 @@ pipeline {
           
            sh "sudo cp -rf client /home/azureuser/"
            sh "sudo cp -rf backend /home/azureuser/"
-           sh "cd /home/azureuser/frontend  && pm2 start npm -- start"
+           sh "pm2 start npm -- start --prefix /home/azureuser/client"
           
             }
           }
