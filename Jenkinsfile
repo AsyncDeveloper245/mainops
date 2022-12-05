@@ -8,7 +8,7 @@ pipeline {
         stage("build frontend/client"){
           
           steps{
-          sh "cd client && npm ci --force && CI=false npm run build"
+          sh "cd client && npm ci --force"
 
             
           }
