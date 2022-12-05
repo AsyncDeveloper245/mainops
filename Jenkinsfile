@@ -19,8 +19,8 @@ pipeline {
             
             steps{
           
-           sh "sudo cp -rf client /home/azureuser/frontend"
-           sh "sudo cp -rf backend /home/azureuser/backend"
+           sh "sudo cp -rf client/* /home/azureuser/frontend"
+           sh "sudo cp -rf backend/* /home/azureuser/backend"
            sh "cd /home/azureuser/frontend  && pm2 start npm -- start"
           
             }
